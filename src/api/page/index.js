@@ -11,9 +11,7 @@ const pageRequests = {
         try {
             const res = await fetchInstance(`/pages`);
 
-            const { data = [] } = res || {};
-
-            return data;
+            return res;
 
         } catch(e) {
             console.log(e.message);
