@@ -8,8 +8,9 @@ import { sort } from './sort.js';
 import { pagination } from './pagination.js';
 import { filters } from './filters.js';
 
-export const getPageQuery = (slug) => {
+export const getPageQuery = ({ locale, slug }) => {
     return {
+        locale,
         fields,
         populate,
         sort,
