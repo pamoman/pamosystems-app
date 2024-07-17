@@ -8,24 +8,29 @@ import { sort } from './sort.js';
 import { pagination } from './pagination.js';
 import { filters } from './filters.js';
 
-export const getProductQuery = ({ locale, slug }) => {
+export const findOneQuery = ({ locale, slug }) => {
     return {
         locale,
         fields,
         populate,
-        sort,
-        pagination,
         filters: filters.slug.filter(slug)
     }
 };
 
-export const getManyProductsQuery = ({ locale, filter = null, page = 1, pageSize = 10 }) => {
+export const findManyQuery = ({ locale, filters: activeFilters = [], page = 1, pageSize = 10 }) => {
+    const filterQuery = activeFilters.map(filter => {
+        const key = Object.keys(filter)[0];
+        const value = filter[key];
+
+        return filters[key].filter(value);
+    });
+
     return {
         locale,
         fields,
         populate,
-        sort,
+        filters: filterQuery?.length ? { $and: filterQuery } : {},
         pagination: pagination({ page, pageSize }),
-        filters: {}
+        sort
     }
 };

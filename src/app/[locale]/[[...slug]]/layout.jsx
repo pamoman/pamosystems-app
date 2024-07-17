@@ -1,7 +1,7 @@
 /*
  * Page Layout
  */
-import { pageRequests, categoryRequests } from '@/api';
+import { pageRequests, categoryRequests, productRequests } from '@/api';
 
 const PageLayout = ({ children }) => (
     <>
@@ -10,27 +10,36 @@ const PageLayout = ({ children }) => (
 );
 
 export const generateStaticParams = async ({ params }) => {
-    const pageRes = await pageRequests.fetchAll(params);
-    const catRes = await categoryRequests.findMany({ ...params, filters: [ { isTLC: true } ] });
+    const pageRes = await pageRequests.findMany(params);
+    const categoryRes = await categoryRequests.findMany(params);
+    const productRes = await productRequests.findMany(params);
 
     const { data: pageData = [] } = pageRes || {};
-    const { data: catData = [] } = catRes || {};
+    const { data: categoryData = [] } = categoryRes || {};
+    const { data: productData = [] } = productRes || {};
 
     const pages = pageData?.filter(page => page?.slug)?.map(page => ({
         slug: [ page.slug ]
     })) || [];
 
-    const cats = catData?.filter(cat => cat?.slug)?.map(cat => ({
+    const categories = categoryData?.filter(cat => cat?.slug)?.map(cat => ({
         slug: [ cat.slug ]
+    })) || [];
+
+    const products = productData?.filter(product => product?.slug)?.map(product => ({
+        slug: [ product.slug ]
     })) || [];
 
     const staticParams = [
         ...pages,
-        ...cats
+        ...categories,
+        ...products
     ];
 
     return staticParams;
 };
+
+export const dynamicParams = false;
 
 
 export default PageLayout;

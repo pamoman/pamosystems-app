@@ -4,7 +4,7 @@
 
 export const filters = {
     "slug": {
-        filter: slug => ({
+        filter: (slug = 'homepage') => ({
             slug
         })
     }

@@ -8,7 +8,7 @@ import { filters } from './filters.js';
 import { pagination } from './pagination.js';
 import { sort } from './sort.js';
 
-export const getPageQuery = ({ locale, slug }) => {
+export const findOneQuery = ({ locale, slug }) => {
     return {
         locale,
         fields,
@@ -17,11 +17,19 @@ export const getPageQuery = ({ locale, slug }) => {
     }
 };
 
-export const getManyPagesQuery = ({ search = null, filter = null, page = 1, pageSize = 10 }) => {
+export const findManyQuery = ({ locale, filters: activeFilters = [], page = 1, pageSize = 10 }) => {
+    const filterQuery = activeFilters.map(filter => {
+        const key = Object.keys(filter)[0];
+        const value = filter[key];
+
+        return filters[key].filter(value);
+    });
+
     return {
+        locale,
         fields,
         populate,
-        filters,
+        filters: filterQuery?.length ? { $and: filterQuery } : {},
         pagination: pagination({ page, pageSize }),
         sort
     }

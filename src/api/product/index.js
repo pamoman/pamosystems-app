@@ -4,28 +4,12 @@
 
 import { fetchInstance } from '@/config';
 import qs from 'qs';
-import { getProductQuery, getManyProductsQuery } from './query';
+import { findOneQuery, findManyQuery } from './query';
 
 const productRequests = {
-    fetchAll: async (params) => {
+    findOne: async (params) => {
         try {
-            const query = getManyProductsQuery(params);
-
-            const queryStr = qs.stringify(query, {
-                encodeValuesOnly: true,
-            });
-
-            const res = await fetchInstance(`/products?${queryStr}`);
-
-            return res;
-
-        } catch(e) {
-            console.log(e.message);
-        }
-    },
-    fetchOne: async (params) => {
-        try {
-            const query = getProductQuery(params);
+            const query = findOneQuery(params);
 
             const queryStr = qs.stringify(query, {
                 encodeValuesOnly: true,
@@ -36,6 +20,22 @@ const productRequests = {
             const [ data = {} ] = res?.data || [];
 
             return data;
+
+        } catch(e) {
+            console.log(e.message);
+        }
+    },
+    findMany: async (params) => {
+        try {
+            const query = findManyQuery(params);
+
+            const queryStr = qs.stringify(query, {
+                encodeValuesOnly: true,
+            });
+
+            const res = await fetchInstance(`/products?${queryStr}`);
+
+            return res;
 
         } catch(e) {
             console.log(e.message);

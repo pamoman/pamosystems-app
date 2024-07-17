@@ -30,7 +30,7 @@ export const findManyQuery = ({ locale, filters: activeFilters = [], page = 1, p
         fields,
         populate,
         filters: filterQuery?.length ? { $and: filterQuery } : {},
-        sort,
         pagination: pagination({ page, pageSize }),
+        sort
     }
 };
