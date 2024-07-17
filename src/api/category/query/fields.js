@@ -1,10 +1,9 @@
 /*
- * Page - Fields
+ * Category - Fields
  */
 
 export const fields = [
     'id',
     'name',
-    'slug',
-    'hide'
+    'slug'
 ];

@@ -10,7 +10,7 @@ export const populate = {
     },
     product_pages: {
         populate: {
-            fields: ['title', 'slug']
+            fields: ['name', 'slug']
         }
     }
 };

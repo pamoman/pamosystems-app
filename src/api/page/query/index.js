@@ -4,17 +4,15 @@
 
 import { fields } from './fields.js';
 import { populate } from './populate.js';
-import { sort } from './sort.js';
-import { pagination } from './pagination.js';
 import { filters } from './filters.js';
+import { pagination } from './pagination.js';
+import { sort } from './sort.js';
 
 export const getPageQuery = ({ locale, slug }) => {
     return {
         locale,
         fields,
         populate,
-        sort,
-        pagination,
         filters: filters.slug.filter(slug)
     }
 };
@@ -23,8 +21,8 @@ export const getManyPagesQuery = ({ search = null, filter = null, page = 1, page
     return {
         fields,
         populate,
-        sort,
+        filters,
         pagination: pagination({ page, pageSize }),
-        filters
+        sort
     }
 };

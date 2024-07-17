@@ -2,17 +2,17 @@
  * Main Pages
  */
 
-import { pageRequests } from '@/api';
+import { websiteRequests } from '@/api';
 
 const Page = async ({ params }) => {
-    const data = await pageRequests.fetchOne(params);
+    const data = await websiteRequests.findSlug(params);
 
-    const { title } = data;
+    const { name } = data || {};
 
     return (
         <main>
             <p>
-                Page Title: {title}
+                Page Title: {name}
             </p>
         </main>
     );

@@ -4,9 +4,9 @@
 
 export const populate = {
     parent: {
-        fields: ['title', 'slug']
+        fields: ['name', 'slug']
     },
     subpages: {
-        fields: ['title', 'slug']
+        fields: ['name', 'slug']
     }
 };

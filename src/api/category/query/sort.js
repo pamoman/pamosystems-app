@@ -1,5 +1,5 @@
 /*
- * Page - Sort
+ * Product - Sort
  */
 
 export const sort = [
