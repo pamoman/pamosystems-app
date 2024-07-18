@@ -3,6 +3,7 @@
  */
 
 import { websiteRequests } from '@/api';
+import { Main } from '@/components/Global';
 
 const Page = async ({ params }) => {
     const data = await websiteRequests.findSlug(params);
@@ -10,11 +11,7 @@ const Page = async ({ params }) => {
     const { name } = data || {};
 
     return (
-        <main>
-            <p>
-                Page Title: {name}
-            </p>
-        </main>
+        <Main { ...data } />
     );
 };
 

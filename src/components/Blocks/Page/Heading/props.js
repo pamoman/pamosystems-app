@@ -1,0 +1,5 @@
+/*
+ * Heading - Props
+ */
+
+export default {};

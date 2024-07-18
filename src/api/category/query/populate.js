@@ -31,5 +31,22 @@ export const populate = {
         populate: {
             fields: ['name', 'slug']
         }
+    },
+    page: {
+        on: {
+            'page.heading': {
+                populate: '*'
+            }
+        }
+    },
+    content: {
+        on: {
+            'content.heading': {
+                populate: '*'
+            },
+            'content.image': {
+                populate: '*'
+            }
+        }
     }
 };
