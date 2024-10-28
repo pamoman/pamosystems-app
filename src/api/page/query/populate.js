@@ -8,5 +8,11 @@ export const populate = {
     },
     subpages: {
         fields: ['name', 'slug']
+    },
+    page: {
+        populate: '*'
+    },
+    content: {
+        populate: '*'
     }
 };

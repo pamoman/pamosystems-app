@@ -8,8 +8,10 @@ import { Grid, Typography } from '@mui/material';
 import styles from './styles';
 
 const Image = ({ image, userSettings = {} }) => {
-    const { url: imageUrl, caption, alternativeText } = image || {};
+    const { url: imageUrl, caption, alternativeText, formats, width, height } = image || {};
     const { show_caption } = { ...defaultSettings, ...userSettings };
+
+    console.log(formats);
 
     return (imageUrl ?
         <Grid container justifyContent="center">
@@ -17,10 +19,8 @@ const Image = ({ image, userSettings = {} }) => {
                 <NextImage 
                     src={`${process.env.NEXT_PUBLIC_PUBLIC_URL}${imageUrl}`}
                     alt={alternativeText}
-                    layout='responsive'
-                    objectFit='cover'
-                    width={16}
-                    height={9}
+                    width={width}
+                    height={height}
                     priority={true}
                 />
                 

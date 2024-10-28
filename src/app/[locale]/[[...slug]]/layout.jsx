@@ -19,7 +19,7 @@ export const generateStaticParams = async ({ params }) => {
     const { data: productData = [] } = productRes || {};
 
     const pages = pageData?.filter(page => page?.slug)?.map(page => ({
-        slug: [ page.slug ]
+        slug: [ ['homepage', 'home'].includes(page.slug) ? '' : page.slug ]
     })) || [];
 
     const categories = categoryData?.filter(cat => cat?.slug)?.map(cat => ({
